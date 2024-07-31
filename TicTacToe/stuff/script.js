@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let playerSymbol = 'X';
     let gameActive = true;
     let playerName = '';
+    const maxDepth = 4; // Tiefe der Rekursion für Minimax
 
     const winningConditions = [
         [0, 1, 2],
@@ -80,12 +81,92 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const aiMove = () => {
-        let availableCells = cells.map((cell, index) => cell === null ? index : null).filter(val => val !== null);
-        let randomIndex = availableCells[Math.floor(Math.random() * availableCells.length)];
-        cells[randomIndex] = currentPlayer;
-        document.querySelector(`.cell[data-index='${randomIndex}']`).textContent = currentPlayer;
+        const bestMove = getBestMove();
+        cells[bestMove] = currentPlayer;
+        document.querySelector(`.cell[data-index='${bestMove}']`).textContent = currentPlayer;
         checkWinner();
         currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    };
+
+    const getBestMove = () => {
+        // Zuerst Blockiere den Gegner, wenn er in der Nähe eines Gewinns ist
+        const blockingMove = findBlockingMove();
+        if (blockingMove !== null) return blockingMove;
+
+        // Ansonsten, wähle den besten Zug basierend auf Minimax
+        const availableCells = cells.map((cell, index) => cell === null ? index : null).filter(val => val !== null);
+        let bestMove = null;
+        let bestScore = -Infinity;
+
+        availableCells.forEach(cell => {
+            cells[cell] = currentPlayer;
+            let score = minimax(cells, 0, false);
+            cells[cell] = null; // Undo the move
+
+            if (score > bestScore) {
+                bestScore = score;
+                bestMove = cell;
+            }
+        });
+
+        return bestMove;
+    };
+
+    const findBlockingMove = () => {
+        const opponent = currentPlayer === 'X' ? 'O' : 'X';
+        for (let i = 0; i < winningConditions.length; i++) {
+            const [a, b, c] = winningConditions[i];
+            if (cells[a] === opponent && cells[b] === opponent && cells[c] === null) return c;
+            if (cells[a] === opponent && cells[c] === opponent && cells[b] === null) return b;
+            if (cells[b] === opponent && cells[c] === opponent && cells[a] === null) return a;
+        }
+        return null;
+    };
+
+    const minimax = (board, depth, isMaximizing) => {
+        const scores = { 'X': 10, 'O': -10, 'tie': 0 };
+        const result = checkGameResult(board);
+
+        if (result !== null) return scores[result];
+
+        if (depth >= maxDepth) return 0; // Tiefe Begrenzung
+
+        if (isMaximizing) {
+            let bestScore = -Infinity;
+            const availableCells = board.map((cell, index) => cell === null ? index : null).filter(val => val !== null);
+
+            availableCells.forEach(cell => {
+                board[cell] = 'X';
+                let score = minimax(board, depth + 1, false);
+                board[cell] = null;
+                bestScore = Math.max(score, bestScore);
+            });
+            return bestScore;
+        } else {
+            let bestScore = Infinity;
+            const availableCells = board.map((cell, index) => cell === null ? index : null).filter(val => val !== null);
+
+            availableCells.forEach(cell => {
+                board[cell] = 'O';
+                let score = minimax(board, depth + 1, true);
+                board[cell] = null;
+                bestScore = Math.min(score, bestScore);
+            });
+            return bestScore;
+        }
+    };
+
+    const checkGameResult = (board) => {
+        for (let i = 0; i < winningConditions.length; i++) {
+            const [a, b, c] = winningConditions[i];
+            if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                return board[a];
+            }
+        }
+
+        if (!board.includes(null)) return 'tie';
+
+        return null;
     };
 
     const reloadPage = () => {
