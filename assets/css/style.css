@@ -119,7 +119,6 @@ article {
 	padding: 15px;
 	box-shadow: var(--shadow-1);
 	z-index: 1;
-    
 }
 
 .separator {
@@ -290,8 +289,12 @@ main {
 }
 
 .avatar-box {
-	background: var(--bg-gradient-onyx);
-    box-shadow: 0 0 10px rgba(0, 5, 0, 1);
+    background: var(--bg-gradient-onyx);
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .info-content .name {
@@ -302,15 +305,37 @@ main {
 	margin-bottom: 10px;
 }
 
-.info-content .title {
-	color: var(--white-1);
-	background: var(--onyx);
-	font-size: var(--fs-8);
-	font-weight: var(--fw-300);
-	width: max-content;
-	padding: 3px 12px;
-	border-radius: 8px;
+.info-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.info-content .title {
+    color: var(--white-1);
+    background: var(--onyx);
+    font-size: var(--fs-8);
+    font-weight: var(--fw-300);
+    width: max-content;
+    padding: 3px 12px;
+    border-radius: 8px;
+    /* Keine weiteren Anpassungen notwendig, wenn die .title bereits richtig positioniert ist */
+}
+
+.info-content .title1 {
+    color: var(--white-1);
+    background: var(--onyx);
+    font-size: var(--fs-8);
+    font-weight: var(--fw-300);
+    width: max-content;
+    padding: 5px 12px;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 2px; /* Verschiebt die .title1-Box 2 Pixel nach unten */
+}
+
 
 .info_more-btn {
 	position: absolute;
