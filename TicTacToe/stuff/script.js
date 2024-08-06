@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let playerSymbol = 'X';
     let gameActive = true;
     let playerName = '';
-    const maxDepth = 4; // Tiefe der Rekursion für Minimax
+    const maxDepth = 4;
 
     const winningConditions = [
         [0, 1, 2],
@@ -89,11 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const getBestMove = () => {
-        // Zuerst Blockiere den Gegner, wenn er in der Nähe eines Gewinns ist
         const blockingMove = findBlockingMove();
         if (blockingMove !== null) return blockingMove;
 
-        // Ansonsten, wähle den besten Zug basierend auf Minimax
         const availableCells = cells.map((cell, index) => cell === null ? index : null).filter(val => val !== null);
         let bestMove = null;
         let bestScore = -Infinity;
@@ -101,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         availableCells.forEach(cell => {
             cells[cell] = currentPlayer;
             let score = minimax(cells, 0, false);
-            cells[cell] = null; // Undo the move
+            cells[cell] = null;
 
             if (score > bestScore) {
                 bestScore = score;
@@ -129,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (result !== null) return scores[result];
 
-        if (depth >= maxDepth) return 0; // Tiefe Begrenzung
+        if (depth >= maxDepth) return 0;
 
         if (isMaximizing) {
             let bestScore = -Infinity;
