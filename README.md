@@ -4,7 +4,7 @@
 https://larrox.xyz
 
 > Staff-List
-https://larrox.xyz/Staff
+https://larrox.xyz/Team
 
 > TicTacToe-Game
 https://larrox.xyz/TicTacToe
