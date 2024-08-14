@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Larrox | Image Converter</title>
+    <script src="scwipt/script.js"></script>
+    <link rel="shortcut icon" href="../assets/images/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="fwansymaker/style.css">
+    <style>
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Bild-Konvertierung und Anzeige</h1>
+
+        <div id="setup">
+            <input type="file" id="imageUpload" accept="image/*">
+            <select id="formatSelect">
+                <option value="image/png">PNG</option>
+                <option value="image/jpeg">JPEG</option>
+            </select>
+            <button onclick="convertAndDisplayImage()">Bild Konvertieren und Anzeigen</button>
+        </div>
+
+        <div class="image-preview">
+            <img id="converted-image" src="" alt="Konvertiertes Bild" style="display:none;">
+        </div>
+
+        <a id="downloadButton" href="#" download="converted-image.png" style="display:none;">
+            <button>Herunterladen</button>
+        </a>
+    </div>
+</body>
+</html>

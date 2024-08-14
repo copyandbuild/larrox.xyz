@@ -1,0 +1,106 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: white;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    max-width: 90%; /* Container passt sich der Seite an */
+    width: 500px; /* Maximale Breite */
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #e0e0e0;
+    text-shadow: 0 0 10px rgba(128, 0, 128, 0.8); /* Lila Glüheffekt */
+}
+
+#setup {
+    margin-bottom: 20px;
+}
+
+#imageUpload {
+    padding: 12px;
+    font-size: 1em;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: white;
+    box-shadow: 0 0 12px rgba(128, 0, 128, 0.8); /* Lila Glüheffekt */
+    transition: box-shadow 0.3s, background-color 0.3s;
+}
+
+#imageUpload:focus {
+    background-color: #444;
+    box-shadow: 0 0 16px rgba(128, 0, 128, 1); /* Intensiverer Glüheffekt beim Fokus */
+    outline: none;
+}
+
+#formatSelect, button {
+    padding: 12px 24px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    box-shadow: 0 0 12px rgba(128, 0, 128, 0.8); /* Lila Glüheffekt */
+    background-color: #7d3c98;
+    color: white;
+    margin: 10px;
+}
+
+#formatSelect {
+    background-color: #333;
+    color: white;
+}
+
+button:hover, #formatSelect:hover {
+    background-color: #5b2c6f;
+    box-shadow: 0 0 20px rgba(128, 0, 128, 1); /* Stärkerer lila Glüheffekt beim Hover */
+    transform: scale(1.05); /* Leichte Vergrößerung beim Hover */
+}
+
+button.red {
+    background-color: #e74c3c;
+    box-shadow: 0 0 12px rgba(255, 0, 0, 0.8); /* Roter Glüheffekt */
+}
+
+button.red:hover {
+    background-color: #c0392b;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 1); /* Stärkerer roter Glüheffekt beim Hover */
+    transform: scale(1.05); /* Leichte Vergrößerung beim Hover */
+}
+
+.image-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px; /* Maximale Breite für die Vorschau */
+    height: auto;
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #333;
+    margin: 0 auto; /* Zentriert die Vorschau horizontal */
+}
+
+.image-preview img {
+    width: 100%;
+    height: auto;
+    max-height: 400px; /* Maximale Höhe für die Vorschau */
+    object-fit: contain;
+}
