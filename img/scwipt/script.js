@@ -17,17 +17,15 @@ function convertAndDisplayImage() {
             canvas.width = img.width;
             canvas.height = img.height;
             ctx.drawImage(img, 0, 0);
-
-            // Konvertiere das Bild und zeige es an
+            
             canvas.toBlob(function(blob) {
                 const newImageUrl = URL.createObjectURL(blob);
                 const convertedImageElement = document.getElementById('converted-image');
                 const downloadButton = document.getElementById('downloadButton');
 
                 convertedImageElement.src = newImageUrl;
-                convertedImageElement.style.display = 'block'; // Bild anzeigen
+                convertedImageElement.style.display = 'block';
 
-                // Setze die Download-URL und zeige den Download-Button an
                 downloadButton.href = newImageUrl;
                 downloadButton.style.display = 'block';
                 downloadButton.download = 'converted-image.' + (format === 'image/png' ? 'png' : 'jpg');
